@@ -1,0 +1,714 @@
+{
+    "openapi": "3.0.2",
+    "info": {
+        "title": "Discards API - Test",
+        "version": "1.0.0",
+        "description": "The discards API is used to send discard data to the SAFIS database for a variety of projects. ",
+        "contact": {
+            "email": "support@accsp.org"
+        },
+        "license": {
+            "name": "MIT License",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "x-logo": {
+            "url": "https://raw.githubusercontent.com/accsp-software/spec-unified-api-prod/master/docs/accsp_logo.jpg"
+        }
+    },
+    "servers": [
+        {
+            "url": "https://safis.accsp.org/safis_test/safist/scamp"
+        }
+    ],
+    "paths": {
+        "/discards_photo_upload": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "image/png": {},
+                        "image/jpeg": {},
+                        "image/bmp": {},
+                        "image/webp": {},
+                        "image/gif": {}
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "supplier_discard_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/discards_photo_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": []
+                    }
+                ],
+                "summary": "discards_photo_upload",
+                "description": "The binary image file is sent as the body of the request. At least 3 headers are expected in the header section. The basic authentication header, a content type header and a custom header named 'supplier_discard_id' that includes the corresponding supplier_discard_id value from discards_upload call. ",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/discards_upload": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/discards_upload_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/discards_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": []
+                    }
+                ],
+                "summary": "discards_upload",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/no_encounters_upload": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/no_encounters_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/no_encounters_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": []
+                    }
+                ],
+                "summary": "no_encounters_upload",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/user_permits": {
+            "post": {
+                "requestBody": {
+                    "description": "",
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/user_permits_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/user_permits_response"
+                                }
+                            }
+                        },
+                        "description": "successful response"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": []
+                    }
+                ],
+                "summary": "user_permits",
+                "description": "This call retrieves a list of fisher or dealer permits for the logged in user with a valid username, password and API key."
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "user_permits_request": {
+                "title": "user_permits_request",
+                "description": "",
+                "required": [
+                    "p_usertype"
+                ],
+                "type": "object",
+                "properties": {
+                    "p_usertype": {
+                        "enum": [
+                            "CATCHULATER",
+                            "SCAMP",
+                            "ALL"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "p_usertype": "ALL"
+                }
+            },
+            "user_permits_response": {
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "license_nbr": {
+                                    "description": "Permit/License number given by the issuing agency",
+                                    "type": "string"
+                                },
+                                "license_type": {
+                                    "description": "License type as defined by the issuing agency",
+                                    "type": "string"
+                                },
+                                "agency": {
+                                    "description": "4 character issuing agency of permit",
+                                    "type": "string"
+                                },
+                                "in_use": {
+                                    "description": "Is the permit currently active?",
+                                    "enum": [
+                                        "Y",
+                                        "N"
+                                    ],
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request attempt",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human readable description of the status reason or failure.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "license_nbr": "11223334",
+                            "license_type": "Release",
+                            "agency": "0003",
+                            "in_use": "Y"
+                        },
+                        {
+                            "license_nbr": "1223111",
+                            "license_type": "Catch-U-Later",
+                            "agency": "0003",
+                            "in_use": "Y"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "User: Active Permit Count:2"
+                }
+            },
+            "discards_upload_request": {
+                "title": "Root Type for discards_upload_request",
+                "description": "",
+                "required": [
+                    "discards"
+                ],
+                "type": "object",
+                "properties": {
+                    "discards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/discard"
+                        }
+                    },
+                    "project_name": {
+                        "description": "Name of the project collecting the discard upload data being sent to ACCSP",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "discards": [
+                        {
+                            "trip_type": "HB",
+                            "trip_start_date": "03/26/2021",
+                            "trip_area_fished": "3ORLESS",
+                            "coast_guard_nbr": "",
+                            "state_reg_nbr": "",
+                            "discard_time": "00:00",
+                            "latitude": "40.7002258300781",
+                            "longitude": "-75.2636655189056",
+                            "location_source": "Device",
+                            "species_itis": "172736",
+                            "fork_length": "",
+                            "length_is_measured": false,
+                            "hook_length": "",
+                            "hook_type": "",
+                            "hook_not_removed": false,
+                            "is_dead": "N",
+                            "is_line_cut": false,
+                            "is_descending_device_used": false,
+                            "supplier_discard_id": "ec7ec352-ca64-495a-afe0-f4ef4c7985be",
+                            "depth": "",
+                            "fish_vented": false,
+                            "shark_predation": false
+                        }
+                    ],
+                    "project_name": "Catch U Later"
+                }
+            },
+            "discard": {
+                "title": "discard",
+                "description": "individual discard",
+                "required": [
+                    "species_itis",
+                    "trip_start_date",
+                    "trip_type"
+                ],
+                "type": "object",
+                "properties": {
+                    "trip_type": {
+                        "description": "Trip Type undertaken. Commercial (C), Recreational (R), For Hire-Charter(A), For Hire-Headboat (H)",
+                        "enum": [
+                            "C",
+                            "R",
+                            "A",
+                            "H"
+                        ],
+                        "type": "string"
+                    },
+                    "trip_start_date": {
+                        "description": "Calendar date of beginning of fishing trip. Format MM/DD/YYYY",
+                        "type": "string"
+                    },
+                    "trip_area_fished": {
+                        "description": "Name of the area fished",
+                        "type": "string"
+                    },
+                    "coast_guard_nbr": {
+                        "description": "Coast Guard Number/Hull Number of vessel. Required to provide either coast_guard_nbr or state_reg_nbr.",
+                        "type": "string"
+                    },
+                    "state_reg_nbr": {
+                        "description": "State Registration number of vessel. If no vessel used, provide 'FROM_SHORE'. Required to provide either coast_guard_nbr or state_reg_nbr.",
+                        "type": "string"
+                    },
+                    "discard_time": {
+                        "description": "Time of discard in the 24 hr format HH24:MI",
+                        "type": "string"
+                    },
+                    "latitude": {
+                        "description": "Latitude of catch location in decimal degrees.",
+                        "type": "string"
+                    },
+                    "longitude": {
+                        "description": "Longitude of catch location in decimal degrees.",
+                        "type": "string"
+                    },
+                    "location_source": {
+                        "type": "string"
+                    },
+                    "species_itis": {
+                        "description": "ITIS code of the fish caught",
+                        "type": "string"
+                    },
+                    "fork_length": {
+                        "description": "length of fork used",
+                        "type": "string"
+                    },
+                    "length_is_measured": {
+                        "description": "indicator for whether the length of the fish was measured",
+                        "type": "boolean"
+                    },
+                    "hook_length": {
+                        "description": "length of hook used",
+                        "type": "string"
+                    },
+                    "hook_type": {
+                        "description": "type of hook used",
+                        "type": "string"
+                    },
+                    "hook_not_removed": {
+                        "description": "indicator for whether hook was not removed  ",
+                        "type": "boolean"
+                    },
+                    "is_dead": {
+                        "description": "indicator for whether the discard is dead",
+                        "type": "string"
+                    },
+                    "is_line_cut": {
+                        "description": "indicator for whether the line was cut",
+                        "type": "boolean"
+                    },
+                    "is_descending_device_used": {
+                        "description": "indicator for whether a descending device was used to catch this discard",
+                        "type": "boolean"
+                    },
+                    "supplier_discard_id": {
+                        "description": "Unique discard id given by the caller. Used to communicate errors and updates. Also used as a reference when uploading corresponding photo using discards_photo_upload API call.",
+                        "type": "string"
+                    },
+                    "depth": {
+                        "description": "fishing depth",
+                        "type": "string"
+                    },
+                    "fish_vented": {
+                        "description": "indicator for whether the fish was vented",
+                        "type": "boolean"
+                    },
+                    "shark_predation": {
+                        "type": "boolean"
+                    }
+                },
+                "example": {
+                    "trip_type": "HB",
+                    "trip_start_date": "03/26/2021",
+                    "trip_area_fished": "3ORLESS",
+                    "coast_guard_nbr": "",
+                    "state_reg_nbr": "",
+                    "discard_time": "00:00",
+                    "latitude": "40.7002258300781",
+                    "longitude": "-75.2636655189056",
+                    "location_source": "Device",
+                    "species_itis": "172736",
+                    "fork_length": "",
+                    "length_is_measured": false,
+                    "hook_length": "",
+                    "hook_type": "",
+                    "hook_not_removed": false,
+                    "is_dead": "N",
+                    "is_line_cut": false,
+                    "is_descending_device_used": false,
+                    "supplier_discard_id": "ec7ec352-ca64-495a-afe0-f4ef4c7985be",
+                    "depth": "",
+                    "fish_vented": false,
+                    "shark_predation": false
+                }
+            },
+            "no_encounter": {
+                "title": "no_encounter",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "trip_start_date": {
+                        "description": "Calendar date of beginning of fishing trip. Format MM/DD/YYYY",
+                        "type": "string"
+                    },
+                    "comments": {
+                        "type": "string"
+                    },
+                    "supplier_encounter_id": {
+                        "description": "unique identifier for this no encounter. Used for updates",
+                        "type": "string"
+                    },
+                    "trip_type": {
+                        "description": "Trip Type undertaken. Commercial (C), Recreational (R), For Hire-Charter(A), For Hire-Headboat (H)",
+                        "enum": [
+                            "C",
+                            "R",
+                            "A",
+                            "H"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "trip_start_date": "11/06/2018",
+                    "comments": "",
+                    "supplier_encounter_id": "04ae6444-bcb3-4171-8565-cb653485df91",
+                    "trip_type": "R"
+                }
+            },
+            "no_encounters_request": {
+                "title": "Root Type for no_encounters_request",
+                "description": "",
+                "required": [
+                    "no_encounters"
+                ],
+                "type": "object",
+                "properties": {
+                    "no_encounters": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/no_encounter"
+                        }
+                    }
+                },
+                "example": {
+                    "no_encounters": [
+                        {
+                            "trip_start_date": "11/06/2018",
+                            "comments": "",
+                            "supplier_encounter_id": "04ae6444-bcb3-4171-8565-cb653485df91",
+                            "trip_type": "R"
+                        },
+                        {
+                            "trip_start_date": "11/09/2018",
+                            "comments": "Test6",
+                            "supplier_encounter_id": "66b6d1bd-0c55-4f9d-8380-96d49bf508cc",
+                            "trip_type": "R"
+                        }
+                    ]
+                }
+            },
+            "discards_photo_upload_response": {
+                "title": "Root Type for discards_photo_upload_response",
+                "description": "",
+                "required": [
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {
+                                    "description": "unique identifier on ACCSP for the submitted payload",
+                                    "type": "string"
+                                },
+                                "supplier_discard_id": {
+                                    "description": "unique id of associated discard record previously uploaded",
+                                    "type": "string"
+                                },
+                                "process_date": {
+                                    "description": "calendar date of time processed by server",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human readable description of the status reason or failure.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "984905",
+                            "supplier_discard_id": "49bb4774-0915-4409-ac60-9834dc94e4d2",
+                            "process_date": "17:01:54"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "The image has been uploaded"
+                }
+            },
+            "discards_upload_response": {
+                "title": "discards_response",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {
+                                    "description": "unique identifier on ACCSP for the submitted payload",
+                                    "type": "string"
+                                },
+                                "upload_date": {
+                                    "format": "date-time",
+                                    "description": "calendar date of submission on server",
+                                    "type": "string"
+                                },
+                                "process_date": {
+                                    "description": "calendar date of processing on server",
+                                    "type": "string"
+                                },
+                                "total_count": {
+                                    "description": "total number of discards identified in the payload",
+                                    "type": "string"
+                                },
+                                "errored_count": {
+                                    "description": "total number of discard records that were not processed due to error(s)",
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "msg": {
+                                                "description": "error description",
+                                                "type": "string"
+                                            },
+                                            "supplier_discard_id": {
+                                                "description": "unique id of discard with the specified error"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "984901",
+                            "upload_date": "2021-06-23 16:33:08",
+                            "process_date": "16:33:09",
+                            "total_count": "2",
+                            "errored_count": "0"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Total rows inserted 2"
+                }
+            },
+            "no_encounters_response": {
+                "title": "Root Type for no_encounters_response",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {
+                                    "description": "unique identifier on ACCSP for the submitted payload",
+                                    "type": "string"
+                                },
+                                "upload_date": {
+                                    "format": "date-time",
+                                    "description": "calendar date of submission on server",
+                                    "type": "string"
+                                },
+                                "process_date": {
+                                    "description": "calendar date of processing on server",
+                                    "type": "string"
+                                },
+                                "total_count": {
+                                    "description": "total number of no-encounters identified in the payload",
+                                    "type": "string"
+                                },
+                                "errored_count": {
+                                    "description": "total number of no-encounter records that were not processed due to error(s)",
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+                                        "type": "object",
+                                        "properties": {
+                                            "msg": {
+                                                "description": "error description",
+                                                "type": "string"
+                                            },
+                                            "supplier_discard_id": {
+                                                "description": "unique id of discard with the specified error"
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "984901",
+                            "upload_date": "2021-06-23 16:33:08",
+                            "process_date": "16:33:09",
+                            "total_count": "2",
+                            "errored_count": "0"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Total rows inserted 2"
+                }
+            }
+        },
+        "securitySchemes": {
+            "Confidential-API": {
+                "scheme": "basic",
+                "type": "http",
+                "description": "username@apikey:password"
+            }
+        }
+    }
+}
