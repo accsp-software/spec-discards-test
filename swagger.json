@@ -2,7 +2,7 @@
     "openapi": "3.0.2",
     "info": {
         "title": "Discards API - Test",
-        "version": "1.0.0",
+        "version": "1.0.1",
         "description": "The discards API is used to send discard data to the SAFIS database for a variety of projects. ",
         "contact": {
             "email": "support@accsp.org"
@@ -25,11 +25,21 @@
             "post": {
                 "requestBody": {
                     "content": {
-                        "image/png": {},
-                        "image/jpeg": {},
-                        "image/bmp": {},
-                        "image/webp": {},
-                        "image/gif": {}
+                        "image/png": {
+
+                        },
+                        "image/jpeg": {
+
+                        },
+                        "image/bmp": {
+
+                        },
+                        "image/webp": {
+
+                        },
+                        "image/gif": {
+
+                        }
                     },
                     "required": true
                 },
@@ -57,7 +67,8 @@
                 },
                 "security": [
                     {
-                        "Confidential-API": []
+                        "Confidential-API": [
+                        ]
                     }
                 ],
                 "summary": "discards_photo_upload",
@@ -91,7 +102,8 @@
                 },
                 "security": [
                     {
-                        "Confidential-API": []
+                        "Confidential-API": [
+                        ]
                     }
                 ],
                 "summary": "discards_upload",
@@ -124,7 +136,8 @@
                 },
                 "security": [
                     {
-                        "Confidential-API": []
+                        "Confidential-API": [
+                        ]
                     }
                 ],
                 "summary": "no_encounters_upload",
@@ -144,7 +157,8 @@
                     },
                     "required": true
                 },
-                "tags": [],
+                "tags": [
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -159,7 +173,8 @@
                 },
                 "security": [
                     {
-                        "Confidential-API": []
+                        "Confidential-API": [
+                        ]
                     }
                 ],
                 "summary": "user_permits",
