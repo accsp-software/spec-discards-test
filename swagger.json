@@ -12,7 +12,7 @@
             "url": "https://opensource.org/licenses/MIT"
         },
         "x-logo": {
-            "url": "https://raw.githubusercontent.com/accsp-software/spec-unified-api-prod/master/docs/accsp_logo.jpg"
+            "url": "https://github.com/accsp-software/spec-discards-test/raw/main/docs/accsp_logo.jpg"
         }
     },
     "servers": [
