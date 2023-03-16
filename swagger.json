@@ -88,6 +88,8 @@
                     },
                     "required": true
                 },
+                "tags": [
+                ],
                 "responses": {
                     "200": {
                         "content": {
@@ -179,6 +181,35 @@
                 ],
                 "summary": "user_permits",
                 "description": "This call retrieves a list of fisher or dealer permits for the logged in user with a valid username, password and API key."
+            }
+        },
+        "/lookup_list": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/lookup_list_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/lookup_list_responses"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "description": ""
             }
         }
     },
@@ -715,6 +746,85 @@
                     ],
                     "status": "OK",
                     "description": "Total rows inserted 2"
+                }
+            },
+            "lookup_list_responses": {
+                "title": "Root Type for lookup_list_responses",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "question_id": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "prompt": {
+                                    "type": "string"
+                                },
+                                "code": {
+                                    "type": "string"
+                                },
+                                "value_type": {
+                                    "type": "string"
+                                },
+                                "title_label": {
+                                    "type": "string"
+                                },
+                                "description_label": {
+                                    "type": "string"
+                                },
+                                "status": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "question_id": 1,
+                            "prompt": "Species",
+                            "code": "AttributeCodes.CatchSpecies",
+                            "value_type": "ValueTypes.String",
+                            "title_label": "Species",
+                            "description_label": "Indicate the species of the catch or discard",
+                            "status": "ACTIVE"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Question_Bank count: 5"
+                }
+            },
+            "lookup_list_request": {
+                "title": "Root Type for lookup_list_request",
+                "description": "",
+                "required": [
+                    "p_listname"
+                ],
+                "type": "object",
+                "properties": {
+                    "p_listname": {
+                        "description": "Array of objects (no_encounter)",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "P_listname": "QUESTION_BANK"
                 }
             }
         },
