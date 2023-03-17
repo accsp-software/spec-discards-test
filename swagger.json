@@ -209,7 +209,8 @@
                         "description": "Successful Response"
                     }
                 },
-                "description": ""
+                "summary": "Lookup_list",
+                "description": "This call retrieves a required question by a particular Projects"
             }
         }
     },
