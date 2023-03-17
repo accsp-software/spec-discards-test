@@ -210,7 +210,7 @@
                     }
                 },
                 "summary": "Lookup_list",
-                "description": "This call retrieves a required question by a particular Projects"
+                "description": "This call retrieves records from the list specified by the value of p_listname"
             }
         }
     },
