@@ -749,9 +749,86 @@
                     "description": "Total rows inserted 2"
                 }
             },
-            "lookup_list_responses": {
-                "title": "Root Type for lookup_list_responses",
+            "lookup_list_request": {
+                "title": "Root Type for lookup_list_request",
                 "description": "",
+                "required": [
+                    "p_listname"
+                ],
+                "type": "object",
+                "properties": {
+                    "p_listname": {
+                        "description": "Lookup list name being requested",
+                        "enum": [
+                            "QUESTION_BANK",
+                            "PROJECTS"
+                        ],
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "P_listname": "QUESTION_BANK"
+                }
+            },
+            "Projects_Response": {
+                "title": "Projects_Response",
+                "description": "Projects List",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "PROJECT_ID": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "PROJECT_NAME": {
+                                    "type": "string"
+                                },
+                                "PROJECT_DESC": {
+                                    "type": "string"
+                                },
+                                "STATUS": {
+                                    "type": "string"
+                                },
+                                "PARTNER_ID": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "PROJECT_ID": 1,
+                            "PROJECT_NAME": "ProjectTest 1",
+                            "PROJECT_DESC": "This is a test project",
+                            "STATUS": "ACTIVE",
+                            "PARTNER_ID": "0003"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Projects count: 1"
+                }
+            },
+            "Question_Bank_Response": {
+                "title": "Question_Bank_Response",
+                "description": "Question Bank List",
                 "type": "object",
                 "properties": {
                     "row": {
@@ -785,6 +862,7 @@
                         }
                     },
                     "status": {
+                        "description": "status of the request",
                         "enum": [
                             "OK",
                             "FAIL"
@@ -792,6 +870,7 @@
                         "type": "string"
                     },
                     "description": {
+                        "description": "human readable description of the result status",
                         "type": "string"
                     }
                 },
@@ -811,22 +890,17 @@
                     "description": "Question_Bank count: 1"
                 }
             },
-            "lookup_list_request": {
-                "title": "Root Type for lookup_list_request",
-                "description": "",
-                "required": [
-                    "p_listname"
-                ],
-                "type": "object",
-                "properties": {
-                    "p_listname": {
-                        "description": "Array of objects (no_encounter)",
-                        "type": "string"
+            "lookup_list_responses": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Question_Bank_Response"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Projects_Response"
                     }
-                },
-                "example": {
-                    "P_listname": "QUESTION_BANK"
-                }
+                ],
+                "description": "",
+                "type": "object"
             }
         },
         "securitySchemes": {
