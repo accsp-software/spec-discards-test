@@ -879,11 +879,15 @@
                         {
                             "question_id": 1,
                             "prompt": "Species",
-                            "code": "AttributeCodes.CatchSpecies",
-                            "value_type": "ValueTypes.String",
+                            "code": "CatchSpecies",
+                            "value_type": "String",
                             "title_label": "Species",
                             "description_label": "Indicate the species of the catch or discard",
-                            "status": "ACTIVE"
+                            "status": "ACTIVE",
+                            "placeholder": "Select Species...",
+                            "list_sources": "Species",
+                            "Is_Required": "True",
+                            "list_type": "Static"
                         }
                     ],
                     "status": "OK",
