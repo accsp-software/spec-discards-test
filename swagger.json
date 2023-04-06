@@ -767,7 +767,7 @@
                     }
                 },
                 "example": {
-                    "P_listname": "QUESTION_BANK"
+                    "p_listname": "QUESTION_BANK"
                 }
             },
             "Projects_Response": {
