@@ -212,6 +212,109 @@
                 "summary": "Lookup_list",
                 "description": "This call retrieves records from the list specified by the value of p_listname"
             }
+        },
+        "/project_file_download": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/project_file_download_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "json": {
+                                        "value": {
+                                            "row": [
+                                                {
+                                                    "file name": "Textfile.txt",
+                                                    "download date": "15:03:05"
+                                                }
+                                            ],
+                                            "status": "OK",
+                                            "description": "Project file downloaded successfully"
+                                        }
+                                    }
+                                }
+                            },
+                            "text/plain": {
+
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "project_file_download",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/project_file_upload": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "text/plain": {
+
+                        }
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "project_id",
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "filename",
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/project_file_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "project_file_upload",
+                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project file and a filename header (optional). ",
+                "x-codegen-request-body-name": "payload"
+            }
         }
     },
     "components": {
@@ -761,7 +864,8 @@
                         "description": "Lookup list name being requested",
                         "enum": [
                             "QUESTION_BANK",
-                            "PROJECTS"
+                            "PROJECTS",
+                            "PROJECT_FILES"
                         ],
                         "type": "string"
                     }
@@ -826,6 +930,103 @@
                     "description": "Projects count: 1"
                 }
             },
+            "lookup_list_responses": {
+                "oneOf": [
+                    {
+                        "$ref": "#/components/schemas/Question_Bank_Response"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Projects_Response"
+                    },
+                    {
+                        "$ref": "#/components/schemas/Project_files_Response"
+                    }
+                ],
+                "description": "",
+                "type": "object"
+            },
+            "project_file_download_response": {
+                "title": "Root Type for project_file_upload_response",
+                "description": "",
+                "type": "object",
+                "example": {
+                    "row": [
+                        {
+                            "file name": "Textfile.txt",
+                            "download date": "15:03:05"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Project file downloaded successfully"
+                }
+            },
+            "project_file_upload_response": {
+                "title": "Root Type for project_file_upload_response",
+                "description": "project_file_upload_response",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "Event_id": {
+                                    "description": "unique identification of the event",
+                                    "type": "string"
+                                },
+                                "Project_id": {
+                                    "description": "uniqui identification of the project uploaded",
+                                    "type": "string"
+                                },
+                                "Process_date": {
+                                    "description": "date of the upload process",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status .",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "1708314",
+                            "project_id": "2",
+                            "process_date": "15:03:05"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "The file has been uploaded"
+                }
+            },
+            "project_file_download_request": {
+                "title": "Project File being downloaded",
+                "description": "Project File being downloaded",
+                "required": [
+                    "p_filename",
+                    "p_listname"
+                ],
+                "type": "object",
+                "properties": {
+                    "p_listname": {
+                        "description": "Project file being downloaded"
+                    }
+                },
+                "example": {
+                    "p_filename": "Textfile.txt"
+                }
+            },
             "Question_Bank_Response": {
                 "title": "Question_Bank_Response",
                 "description": "Question Bank List",
@@ -836,10 +1037,6 @@
                         "items": {
                             "type": "object",
                             "properties": {
-                                "question_id": {
-                                    "format": "int32",
-                                    "type": "integer"
-                                },
                                 "prompt": {
                                     "type": "string"
                                 },
@@ -856,6 +1053,18 @@
                                     "type": "string"
                                 },
                                 "status": {
+                                    "type": "string"
+                                },
+                                "placeholder": {
+                                    "type": "string"
+                                },
+                                "list_sources": {
+                                    "type": "string"
+                                },
+                                "is_required": {
+                                    "type": "string"
+                                },
+                                "list_type": {
                                     "type": "string"
                                 }
                             }
@@ -877,7 +1086,6 @@
                 "example": {
                     "row": [
                         {
-                            "question_id": 1,
                             "prompt": "Species",
                             "code": "CatchSpecies",
                             "value_type": "String",
@@ -886,7 +1094,7 @@
                             "status": "ACTIVE",
                             "placeholder": "Select Species...",
                             "list_sources": "Species",
-                            "Is_Required": "True",
+                            "is_required": "True",
                             "list_type": "Static"
                         }
                     ],
@@ -894,17 +1102,60 @@
                     "description": "Question_Bank count: 1"
                 }
             },
-            "lookup_list_responses": {
-                "oneOf": [
-                    {
-                        "$ref": "#/components/schemas/Question_Bank_Response"
-                    },
-                    {
-                        "$ref": "#/components/schemas/Projects_Response"
-                    }
+            "Project_files_Response": {
+                "title": "Project_files_Response",
+                "description": "Project Files",
+                "required": [
                 ],
-                "description": "",
-                "type": "object"
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "PROJECT_ID": {
+                                    "format": "int32",
+                                    "type": "integer"
+                                },
+                                "FILE_NAME": {
+                                    "type": "string"
+                                },
+                                "UPLOAD_TIME": {
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "PROJECT_ID": 1,
+                            "FILE_NAME": "TESTFILE3",
+                            "UPLOAD_TIME": "2023-04-13T09:58:34"
+                        },
+                        {
+                            "PROJECT_ID": 1,
+                            "FILE_NAME": "TESTFILE4",
+                            "UPLOAD_TIME": "2023-04-14T17:05:45"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Project_Files count: 3"
+                }
             }
         },
         "securitySchemes": {
