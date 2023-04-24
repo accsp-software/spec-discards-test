@@ -312,7 +312,7 @@
                     }
                 ],
                 "summary": "project_file_upload",
-                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project file and a filename header (optional). ",
+                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and a filename header (optional). ",
                 "x-codegen-request-body-name": "payload"
             }
         }
@@ -1010,23 +1010,6 @@
                     "description": "The file has been uploaded"
                 }
             },
-            "project_file_download_request": {
-                "title": "Project File being downloaded",
-                "description": "Project File being downloaded",
-                "required": [
-                    "p_filename",
-                    "p_listname"
-                ],
-                "type": "object",
-                "properties": {
-                    "p_listname": {
-                        "description": "Project file being downloaded"
-                    }
-                },
-                "example": {
-                    "p_filename": "Textfile.txt"
-                }
-            },
             "Question_Bank_Response": {
                 "title": "Question_Bank_Response",
                 "description": "Question Bank List",
@@ -1155,6 +1138,22 @@
                     ],
                     "status": "OK",
                     "description": "Project_Files count: 3"
+                }
+            },
+            "project_file_download_request": {
+                "title": "Project File being downloaded",
+                "description": "Project File being downloaded",
+                "required": [
+                    "p_filename"
+                ],
+                "type": "object",
+                "properties": {
+                    "p_filename": {
+                        "description": "Project file being downloaded"
+                    }
+                },
+                "example": {
+                    "p_filename": "Textfile.txt"
                 }
             }
         },
