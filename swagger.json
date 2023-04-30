@@ -213,57 +213,6 @@
                 "description": "This call retrieves records from the list specified by the value of p_listname"
             }
         },
-        "/project_file_download": {
-            "post": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/project_file_download_request"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "type": "string"
-                                },
-                                "examples": {
-                                    "json": {
-                                        "value": {
-                                            "row": [
-                                                {
-                                                    "file name": "Textfile.txt",
-                                                    "download date": "15:03:05"
-                                                }
-                                            ],
-                                            "status": "OK",
-                                            "description": "Project file downloaded successfully"
-                                        }
-                                    }
-                                }
-                            },
-                            "text/plain": {
-
-                            }
-                        },
-                        "description": "output of the endpoint"
-                    }
-                },
-                "security": [
-                    {
-                        "Confidential-API": [
-                        ]
-                    }
-                ],
-                "summary": "project_file_download",
-                "x-codegen-request-body-name": "payload"
-            }
-        },
         "/project_file_upload": {
             "post": {
                 "requestBody": {
@@ -313,6 +262,57 @@
                 ],
                 "summary": "project_file_upload",
                 "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and a filename header (optional). ",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/get_project_file": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/get_project_file_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "string"
+                                },
+                                "examples": {
+                                    "json": {
+                                        "value": {
+                                            "row": [
+                                                {
+                                                    "file name": "Textfile.txt",
+                                                    "download date": "15:03:05"
+                                                }
+                                            ],
+                                            "status": "OK",
+                                            "description": "Project file downloaded successfully"
+                                        }
+                                    }
+                                }
+                            },
+                            "text/plain": {
+
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "project_file_download",
                 "x-codegen-request-body-name": "payload"
             }
         }
@@ -945,21 +945,6 @@
                 "description": "",
                 "type": "object"
             },
-            "project_file_download_response": {
-                "title": "Root Type for project_file_upload_response",
-                "description": "",
-                "type": "object",
-                "example": {
-                    "row": [
-                        {
-                            "file name": "Textfile.txt",
-                            "download date": "15:03:05"
-                        }
-                    ],
-                    "status": "OK",
-                    "description": "Project file downloaded successfully"
-                }
-            },
             "project_file_upload_response": {
                 "title": "Root Type for project_file_upload_response",
                 "description": "project_file_upload_response",
@@ -1140,7 +1125,7 @@
                     "description": "Project_Files count: 3"
                 }
             },
-            "project_file_download_request": {
+            "get_project_file_request": {
                 "title": "Project File being downloaded",
                 "description": "Project File being downloaded",
                 "required": [
@@ -1154,6 +1139,21 @@
                 },
                 "example": {
                     "p_filename": "Textfile.txt"
+                }
+            },
+            "get_project_file_response": {
+                "title": "Root Type for project_file_upload_response",
+                "description": "",
+                "type": "object",
+                "example": {
+                    "row": [
+                        {
+                            "file name": "Textfile.txt",
+                            "download date": "15:03:05"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Project file downloaded successfully"
                 }
             }
         },
