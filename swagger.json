@@ -213,58 +213,6 @@
                 "description": "This call retrieves records from the list specified by the value of p_listname"
             }
         },
-        "/project_file_upload": {
-            "post": {
-                "requestBody": {
-                    "content": {
-                        "text/plain": {
-
-                        }
-                    },
-                    "required": true
-                },
-                "parameters": [
-                    {
-                        "name": "project_id",
-                        "description": "",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header",
-                        "required": true
-                    },
-                    {
-                        "name": "filename",
-                        "description": "",
-                        "schema": {
-                            "type": "string"
-                        },
-                        "in": "header"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/project_file_upload_response"
-                                }
-                            }
-                        },
-                        "description": "output of the endpoint"
-                    }
-                },
-                "security": [
-                    {
-                        "Confidential-API": [
-                        ]
-                    }
-                ],
-                "summary": "project_file_upload",
-                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and a filename header (optional). ",
-                "x-codegen-request-body-name": "payload"
-            }
-        },
         "/get_project_file": {
             "post": {
                 "requestBody": {
@@ -313,6 +261,59 @@
                     }
                 ],
                 "summary": "project_file_download",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/project_file_upload": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "text/plain": {
+
+                        }
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "project_id",
+                        "description": "",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
+                    },
+                    {
+                        "name": "account_holder",
+                        "description": "Use the project contact_id or Email",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/project_file_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "project_file_upload",
+                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and an account_holder (use project contact_id or Email ). ",
                 "x-codegen-request-body-name": "payload"
             }
         }
@@ -920,10 +921,12 @@
                     "row": [
                         {
                             "PROJECT_ID": 1,
-                            "PROJECT_NAME": "ProjectTest 1",
-                            "PROJECT_DESC": "This is a test project",
-                            "STATUS": "ACTIVE",
-                            "PARTNER_ID": "0003"
+                            "PROJECT_NAME": "SAFMC",
+                            "PROJECT_DESC": "SAFMC PROJECT",
+                            "PROJECT_CONTACT_ID": 3,
+                            "ACCOUNT HOLDER": "SAFMC CONTACTNAME",
+                            "EMAIL": "CONTACT@SAFMC.ORG",
+                            "STATUS": "ACTIVE"
                         }
                     ],
                     "status": "OK",
