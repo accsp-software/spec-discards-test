@@ -948,56 +948,6 @@
                 "description": "",
                 "type": "object"
             },
-            "project_file_upload_response": {
-                "title": "Root Type for project_file_upload_response",
-                "description": "project_file_upload_response",
-                "type": "object",
-                "properties": {
-                    "row": {
-                        "type": "array",
-                        "items": {
-                            "type": "object",
-                            "properties": {
-                                "Event_id": {
-                                    "description": "unique identification of the event",
-                                    "type": "string"
-                                },
-                                "Project_id": {
-                                    "description": "uniqui identification of the project uploaded",
-                                    "type": "string"
-                                },
-                                "Process_date": {
-                                    "description": "date of the upload process",
-                                    "type": "string"
-                                }
-                            }
-                        }
-                    },
-                    "status": {
-                        "description": "status of the request",
-                        "enum": [
-                            "OK",
-                            "FAIL"
-                        ],
-                        "type": "string"
-                    },
-                    "description": {
-                        "description": "human readable description of the result status .",
-                        "type": "string"
-                    }
-                },
-                "example": {
-                    "row": [
-                        {
-                            "event_id": "1708314",
-                            "project_id": "2",
-                            "process_date": "15:03:05"
-                        }
-                    ],
-                    "status": "OK",
-                    "description": "The file has been uploaded"
-                }
-            },
             "Question_Bank_Response": {
                 "title": "Question_Bank_Response",
                 "description": "Question Bank List",
@@ -1157,6 +1107,56 @@
                     ],
                     "status": "OK",
                     "description": "Project file downloaded successfully"
+                }
+            },
+            "project_file_upload_response": {
+                "title": "Root Type for project_file_upload_response",
+                "description": "project_file_upload_response",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "Event_id": {
+                                    "description": "unique identification of the event",
+                                    "type": "string"
+                                },
+                                "Project_id": {
+                                    "description": "unique identification of the project uploaded",
+                                    "type": "string"
+                                },
+                                "Process_date": {
+                                    "description": "date of the upload process",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "human readable description of the result status .",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "1708314",
+                            "project_id": "2",
+                            "process_date": "15:03:05"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "The file has been uploaded"
                 }
             }
         },
