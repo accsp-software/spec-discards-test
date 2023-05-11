@@ -914,9 +914,7 @@
                             "PROJECT_ID": 1,
                             "PROJECT_NAME": "SAFMC",
                             "PROJECT_DESC": "SAFMC PROJECT",
-                            "PROJECT_CONTACT_ID": 3,
-                            "ACCOUNT HOLDER": "SAFMC CONTACTNAME",
-                            "EMAIL": "CONTACT@SAFMC.ORG",
+                            "ACCOUNT HOLDER": "SCIFISH TEST",
                             "STATUS": "ACTIVE"
                         }
                     ],
