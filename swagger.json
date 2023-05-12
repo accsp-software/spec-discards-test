@@ -283,6 +283,15 @@
                         },
                         "in": "header",
                         "required": true
+                    },
+                    {
+                        "name": "filename",
+                        "description": "set a project filename",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
                     }
                 ],
                 "responses": {
@@ -304,7 +313,7 @@
                     }
                 ],
                 "summary": "project_file_upload",
-                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier. ",
+                "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and a filename header. ",
                 "x-codegen-request-body-name": "payload"
             }
         }
