@@ -183,36 +183,6 @@
                 "description": "This call retrieves a list of fisher or dealer permits for the logged in user with a valid username, password and API key."
             }
         },
-        "/lookup_list": {
-            "post": {
-                "requestBody": {
-                    "content": {
-                        "application/json": {
-                            "schema": {
-                                "$ref": "#/components/schemas/lookup_list_request"
-                            }
-                        }
-                    },
-                    "required": true
-                },
-                "tags": [
-                ],
-                "responses": {
-                    "200": {
-                        "content": {
-                            "application/json": {
-                                "schema": {
-                                    "$ref": "#/components/schemas/lookup_list_responses"
-                                }
-                            }
-                        },
-                        "description": "Successful Response"
-                    }
-                },
-                "summary": "Lookup_list",
-                "description": "This call retrieves records from the list specified by the value of p_listname"
-            }
-        },
         "/get_project_file": {
             "post": {
                 "requestBody": {
@@ -315,6 +285,36 @@
                 "summary": "project_file_upload",
                 "description": "The binary text file is sent as the body of the request. At least 4 headers are expected in the header section. The basic authentication header, a content type header, a custom header named 'project_id' that includes the corresponding project identifier and a filename header. ",
                 "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/lookup_list": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/lookup_list_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/lookup_list_responses"
+                                }
+                            }
+                        },
+                        "description": "Successful Response"
+                    }
+                },
+                "summary": "Lookup_list",
+                "description": "This call retrieves records from the list specified by the value of p_listname.   If the question attribute list_type has an attribute value of \"Static\" this list's  values will be provided in the list_options attribute value. If the question attribute  list_type is \"Dynamic\" a SAFIS eTrips \"list_name\" will be provided. The list_name can be  used to pull list values from the SAFIS eTrips lookup_list endpoint. The p_partner input  parameter is optional when calling the SAFIS lookup_list for SciFish list values."
             }
         }
     },
