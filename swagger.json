@@ -1005,16 +1005,37 @@
                 "example": {
                     "row": [
                         {
-                            "prompt": "Species",
-                            "code": "CatchSpecies",
+                            "prompt": "Hook Type",
+                            "code": "HookType",
                             "value_type": "String",
-                            "title_label": "Species",
-                            "description_label": "Indicate the species of the catch or discard",
+                            "title_label": "Hook Type",
+                            "description_label": "Select from a list of hook types",
                             "status": "ACTIVE",
-                            "placeholder": "Select Species...",
-                            "list_sources": "Species",
-                            "is_required": "True",
-                            "list_type": "Static"
+                            "list_type": "Static",
+                            "list_options": [
+                                {
+                                    "1": "Circle(Non-Offset)",
+                                    "2": "Circle(offset)",
+                                    "3": "J-Hook",
+                                    "4": "Other"
+                                }
+                            ],
+                            "placeholder": "Select Hook Type..."
+                        },
+                        {
+                            "prompt": "Line Cut",
+                            "code": "LineCut",
+                            "value_type": "Boolean",
+                            "title_label": "Line Cut",
+                            "description_label": "Yes/No - Was the line cut?",
+                            "status": "ACTIVE",
+                            "list_type": "Static",
+                            "list_options": [
+                                {
+                                    "1": "Yes",
+                                    "2": "No"
+                                }
+                            ]
                         }
                     ],
                     "status": "OK",
