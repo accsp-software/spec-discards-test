@@ -1005,41 +1005,37 @@
                 "example": {
                     "row": [
                         {
-                            "prompt": "Hook Type",
-                            "code": "HookType",
-                            "value_type": "String",
-                            "title_label": "Hook Type",
-                            "description_label": "Select from a list of hook types",
-                            "status": "ACTIVE",
-                            "list_type": "Static",
-                            "list_options": [
-                                {
-                                    "1": "Circle(Non-Offset)",
-                                    "2": "Circle(offset)",
-                                    "3": "J-Hook",
-                                    "4": "Other"
-                                }
-                            ],
-                            "placeholder": "Select Hook Type..."
-                        },
-                        {
-                            "prompt": "Line Cut",
-                            "code": "LineCut",
+                            "prompt": "Shark Predation",
+                            "code": "SharkPredation",
                             "value_type": "Boolean",
-                            "title_label": "Line Cut",
-                            "description_label": "Yes/No - Was the line cut?",
+                            "title_label": "Shark Predation",
+                            "description_label": "Yes/No - was there evidence of shark predation on the catch?",
                             "status": "ACTIVE",
                             "list_type": "Static",
                             "list_options": [
                                 {
-                                    "1": "Yes",
+                                    "1": "Yes"
+                                },
+                                {
                                     "2": "No"
                                 }
                             ]
+                        },
+                        {
+                            "prompt": "Trip Type",
+                            "code": "TripType",
+                            "value_type": "String",
+                            "title_label": "Trip Type",
+                            "description_label": "Select from a list of trip types",
+                            "status": "ACTIVE",
+                            "list_name": "TRIP_ACTIVITY",
+                            "list_type": "Dynamic",
+                            "placeholder": "Select Trip Type ...",
+                            "is_required": "True"
                         }
                     ],
                     "status": "OK",
-                    "description": "Question_Bank count: 1"
+                    "description": "Question_Bank count: 16"
                 }
             },
             "Project_files_Response": {
