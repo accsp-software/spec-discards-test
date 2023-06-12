@@ -1022,6 +1022,57 @@
                             ]
                         },
                         {
+                            "prompt": "Hook Location",
+                            "code": "HookLocation",
+                            "value_type": "String",
+                            "title_label": "Hook Location",
+                            "description_label": "Select from a list of hook locations",
+                            "status": "ACTIVE",
+                            "list_type": "Static",
+                            "list_options": [
+                                {
+                                    "B": "Body"
+                                },
+                                {
+                                    "E": "Eyes"
+                                },
+                                {
+                                    "G": "Gill"
+                                },
+                                {
+                                    "J": "Jaw"
+                                },
+                                {
+                                    "T": "Throat"
+                                }
+                            ],
+                            "placeholder": "Select Hook Location..."
+                        },
+                        {
+                            "prompt": "Hook Type",
+                            "code": "HookType",
+                            "value_type": "String",
+                            "title_label": "Hook Type",
+                            "description_label": "Select from a list of hook types",
+                            "status": "ACTIVE",
+                            "list_type": "Static",
+                            "list_options": [
+                                {
+                                    "CN": "Circle(Non-Offset)"
+                                },
+                                {
+                                    "CO": "Circle(offset)"
+                                },
+                                {
+                                    "JH": "J-Hook"
+                                },
+                                {
+                                    "O": "Other"
+                                }
+                            ],
+                            "placeholder": "Select Hook Type..."
+                        },
+                        {
                             "prompt": "Trip Type",
                             "code": "TripType",
                             "value_type": "String",
