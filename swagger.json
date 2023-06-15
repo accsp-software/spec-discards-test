@@ -1079,7 +1079,7 @@
                             "title_label": "Trip Type",
                             "description_label": "Select from a list of trip types",
                             "status": "ACTIVE",
-                            "list_name": "TRIP_ACTIVITY",
+                            "list_name": "SCIFISH_TRIP_ACTIVITY",
                             "list_type": "Dynamic",
                             "placeholder": "Select Trip Type ...",
                             "is_required": "True"
