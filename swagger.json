@@ -389,20 +389,22 @@
                 "example": {
                     "row": [
                         {
-                            "license_nbr": "11223334",
-                            "license_type": "Release",
-                            "agency": "0003",
-                            "in_use": "Y"
+                            "license_nbr": "11344510",
+                            "license_type": "RELEASE",
+                            "project_id": 50,
+                            "in_use": "Y",
+                            "is_admin": "Y"
                         },
                         {
-                            "license_nbr": "1223111",
-                            "license_type": "Catch-U-Later",
-                            "agency": "0003",
-                            "in_use": "Y"
+                            "license_nbr": "11221110",
+                            "license_type": "CATCH-U-LATER",
+                            "project_id": 3,
+                            "in_use": "Y",
+                            "is_admin": "N"
                         }
                     ],
                     "status": "OK",
-                    "description": "User: Active Permit Count:2"
+                    "description": "User :SCIFISHTEST Active Permit Count:2"
                 }
             },
             "discards_upload_request": {
