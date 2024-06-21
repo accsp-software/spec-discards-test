@@ -316,6 +316,97 @@
                 "summary": "Lookup_list",
                 "description": "This call retrieves records from the list specified by the value of p_listname.   If the question attribute list_type has an attribute value of \"Static\" this list's  values will be provided in the list_options attribute value. If the question attribute  list_type is \"Dynamic\" a SAFIS eTrips \"list_name\" will be provided. The list_name can be  used to pull list values from the SAFIS eTrips lookup_list endpoint. The p_partner input  parameter is optional when calling the SAFIS lookup_list for SciFish list values."
             }
+        },
+        "/scifish_photo_upload/": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "image/png": {
+
+                        },
+                        "image/jpeg": {
+
+                        },
+                        "image/bmp": {
+
+                        },
+                        "image/webp": {
+
+                        },
+                        "image/gif": {
+
+                        }
+                    },
+                    "required": true
+                },
+                "parameters": [
+                    {
+                        "name": "supplier_scifish_id",
+                        "schema": {
+                            "type": "string"
+                        },
+                        "in": "header",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/scifish_photo_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "scifish_photo_upload",
+                "description": "The binary image file is sent as the body of the request. At least 3 headers are expected in the header section. The basic authentication header, a content type header and a custom header named 'supplier_scifish_id' that includes the corresponding supplier_scifish_id value from scifish_upload call. ",
+                "x-codegen-request-body-name": "payload"
+            }
+        },
+        "/scifish_upload/": {
+            "post": {
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/scifish_upload_request"
+                            }
+                        }
+                    },
+                    "required": true
+                },
+                "tags": [
+                ],
+                "responses": {
+                    "200": {
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/scifish_upload_response"
+                                }
+                            }
+                        },
+                        "description": "output of the endpoint"
+                    }
+                },
+                "security": [
+                    {
+                        "Confidential-API": [
+                        ]
+                    }
+                ],
+                "summary": "scifish_upload",
+                "x-codegen-request-body-name": "payload"
+            }
         }
     },
     "components": {
@@ -1225,6 +1316,169 @@
                     ],
                     "status": "OK",
                     "description": "The file has been uploaded"
+                }
+            },
+            "scifish_photo_upload_response": {
+                "title": "Root Type for scifish_photo_upload_response",
+                "description": "",
+                "required": [
+                    "status"
+                ],
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {
+                                    "description": "unique identifier on ACCSP for the submitted payload",
+                                    "type": "string"
+                                },
+                                "supplier_scifish_id": {
+                                    "description": "unique id of associated discard record previously uploaded",
+                                    "type": "string"
+                                },
+                                "process_date": {
+                                    "description": "calendar date of time processed by server",
+                                    "type": "string"
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "description": "status of the request",
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "description": "Human readable description of the status reason or failure.",
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "985885",
+                            "supplier_scifish_id": "78bb4774-0915-4409-ac54-9834dc66e4f3",
+                            "process_date": "17:44:54"
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "The image has been uploaded"
+                }
+            },
+            "scifish_upload_request": {
+                "title": "Root Type for scifish_upload_request",
+                "description": "",
+                "required": [
+                    "discards"
+                ],
+                "type": "object",
+                "properties": {
+                    "discards": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/discard"
+                        }
+                    },
+                    "project_id": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "discards": [
+                        {
+                            "trip_type": "HB",
+                            "trip_start_date": "03/05/2023",
+                            "trip_area_fished": "3ORLESS",
+                            "coast_guard_nbr": "",
+                            "state_reg_nbr": "",
+                            "discard_time": "00:00",
+                            "latitude": "40.7002258300781",
+                            "longitude": "-75.2636655189056",
+                            "location_source": "Device",
+                            "species_itis": "172736",
+                            "fork_length": "",
+                            "length_is_measured": false,
+                            "hook_length": "",
+                            "hook_type": "",
+                            "hook_not_removed": false,
+                            "is_dead": "N",
+                            "is_line_cut": false,
+                            "is_descending_device_used": false,
+                            "supplier_discard_id": "ec7ec352-ca64-495a-afe0-f4ef4c7985be",
+                            "depth": "",
+                            "fish_vented": false,
+                            "shark_predation": false
+                        }
+                    ],
+                    "project_id": "50"
+                }
+            },
+            "scifish_upload_response": {
+                "title": "Root Type for scifish_upload_response",
+                "description": "",
+                "type": "object",
+                "properties": {
+                    "row": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "event_id": {
+                                    "type": "string"
+                                },
+                                "upload_date": {
+                                    "format": "date-time",
+                                    "type": "string"
+                                },
+                                "process_date": {
+                                    "type": "string"
+                                },
+                                "total_count": {
+                                    "type": "string"
+                                },
+                                "errored_count": {
+                                    "type": "string"
+                                },
+                                "errors": {
+                                    "type": "array",
+                                    "items": {
+
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    "status": {
+                        "enum": [
+                            "OK",
+                            "FAIL"
+                        ],
+                        "type": "string"
+                    },
+                    "description": {
+                        "type": "string"
+                    }
+                },
+                "example": {
+                    "row": [
+                        {
+                            "event_id": "3608299",
+                            "upload_date": "2024-04-16 13:43:30",
+                            "process_date": "13:43:31",
+                            "total_count": "1",
+                            "errored_count": "0",
+                            "errors": [
+                            ]
+                        }
+                    ],
+                    "status": "OK",
+                    "description": "Total rows inserted 1"
                 }
             }
         },
