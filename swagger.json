@@ -341,7 +341,7 @@
                 },
                 "parameters": [
                     {
-                        "name": "supplier_scifish_id",
+                        "name": "supplier_discard_id",
                         "schema": {
                             "type": "string"
                         },
@@ -1392,28 +1392,43 @@
                 "example": {
                     "discards": [
                         {
-                            "trip_type": "HB",
-                            "trip_start_date": "03/05/2023",
-                            "trip_area_fished": "3ORLESS",
+                            "trip_type": "A",
+                            "trip_start_date": "07/08/2024",
+                            "trip_area_fished": "",
                             "coast_guard_nbr": "",
                             "state_reg_nbr": "",
-                            "discard_time": "00:00",
-                            "latitude": "40.7002258300781",
-                            "longitude": "-75.2636655189056",
+                            "discard_time": "13: 38",
+                            "latitude": "0",
+                            "longitude": "0",
                             "location_source": "Device",
-                            "species_itis": "172736",
+                            "species_itis": "168853",
                             "fork_length": "",
-                            "length_is_measured": false,
-                            "hook_length": "",
-                            "hook_type": "",
+                            "length_is_measured": true,
+                            "hook_length": "T",
+                            "hook_type": "Circle_Non-Offset",
                             "hook_not_removed": false,
                             "is_dead": "N",
-                            "is_line_cut": false,
+                            "is_line_cut": true,
                             "is_descending_device_used": false,
-                            "supplier_discard_id": "ec7ec352-ca64-495a-afe0-f4ef4c7985be",
-                            "depth": "",
+                            "supplier_discard_id": "94e26194-d00f-40fb-be26-8f2723c781c8",
+                            "depth": "23",
                             "fish_vented": false,
-                            "shark_predation": false
+                            "shark_predation": false,
+                            "state": "37",
+                            "GearType": "",
+                            "TagNumber": "",
+                            "TagNumber2": "",
+                            "TagColor": "",
+                            "BiologicalSampleCollected": "",
+                            "NumPeopleFishing": 2,
+                            "HoursFished": 6,
+                            "GearAmount": 2,
+                            "NumFishKept": 3,
+                            "NumFishReleased": 2,
+                            "Comment": "",
+                            "LengthType": "",
+                            "PrimaryTargetSpecies": "",
+                            "OtherSurvey": "N"
                         }
                     ],
                     "project_id": "50"
