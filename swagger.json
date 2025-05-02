@@ -553,7 +553,8 @@
                 "required": [
                     "species_itis",
                     "trip_start_date",
-                    "trip_type"
+                    "trip_type",
+                    "supplier_discard_id"
                 ],
                 "type": "object",
                 "properties": {
