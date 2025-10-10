@@ -1388,6 +1388,10 @@
                     },
                     "project_id": {
                         "type": "string"
+                    },
+                    "angler_user": {
+                        "description": "The AnglerCatch user (required for AnglerCatch submission)",
+                        "type": "string"
                     }
                 },
                 "example": {
@@ -1432,7 +1436,8 @@
                             "OtherSurvey": "N"
                         }
                     ],
-                    "project_id": "50"
+                    "project_id": "93",
+                    "angler_user": "HLUSERTEST"
                 }
             },
             "scifish_upload_response": {
